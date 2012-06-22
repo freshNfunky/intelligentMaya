@@ -1,0 +1,12 @@
+
+# check the right use of this Function
+"""   if scriptedPanel( instance, ex=True,):
+    	control = scriptedPanel (instance, q=True, control=True)
+    	print "Panel Name: %s" % control
+    	setParent (control) 
+    	parent = str(setParent (upLevel=True))
+    	print "Parent Name: %s" % parent
+    	if not parent: return 
+    else: return 
+"""
+   

@@ -1,0 +1,30 @@
+/*
+*********************
+Event Monitor v 0.0.1
+Info: callsup event alert when an action is made
+creator: Felix Schaller - www.felixschaller.com
+**********************
+*/
+
+
+global proc eventCallup (string $event,string $message) 
+{
+	print ("Event: "+$event+"    "+$message+"\n");
+	
+}
+global proc monitorEvents ()
+{
+	string $scriptjobs[] = `scriptJob -listEvents`;
+	int $i=0;
+	int $jobId[];
+	for	($job in $scriptjobs) {
+		if (!`gmatch $job "idle*"`) {
+			$jobId[$i++] = `scriptJob -e $job ("eventCallup(\""+$job+"\",`repeatLast -q -i`)")`; 
+			print ("Event:  "+$job+"  ID:"+$jobId[$i-1]+"\n");
+		}
+	}
+	
+	
+}
+
+monitorEvents;

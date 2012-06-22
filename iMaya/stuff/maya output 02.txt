@@ -1,0 +1,95 @@
+
+iMayaAddCallback iMayaScriptedPanel;
+'iMayaAddCallback' with:iMayaScriptedPanelcreateModelPanelMenu modelPanel1;
+createModelPanelMenu modelPanel2;
+createModelPanelMenu modelPanel3;
+createModelPanelMenu modelPanel4;
+buildPanelPopupMenu scriptEditorPanel1;
+buildPanelPopupMenu iMayaScriptedPanel;
+Key:  nurbsCurveRebuildPrefsChanged Value: 611
+Key:                    ToolChanged Value: 569
+Key: symmetricModellingOptionsChanged Value: 605
+Key:                  PostSceneRead Value: 619
+Key:         currentContainerChange Value: 566
+Key:               SelectionChanged Value: 580
+Key:             gridDisplayChanged Value: 624
+Key:                    DragRelease Value: 621
+Key:                timeUnitChanged Value: 561
+Key:        angularToleranceChanged Value: 609
+Key:               animLayerRefresh Value: 573
+Key:           animLayerLockChanged Value: 575
+Key:                quitApplication Value: 567
+Key:               renderPassChange Value: 593
+Key:                   cameraChange Value: 578
+Key:            displayLayerDeleted Value: 590
+Key:      animLayerAnimationChanged Value: 574
+Key:      nurbsToSubdivPrefsChanged Value: 630
+Key:                     SceneSaved Value: 614
+Key:      passContributionMapChange Value: 596
+Key:                 NewSceneOpened Value: 615
+Key:         DisplayRGBColorChanged Value: 571
+Key:                    timeChanged Value: 565
+Key:  cameraDisplayAttributesChange Value: 579
+Key:     playbackRangeSliderChanged Value: 633
+Key:                MenuModeChanged Value: 623
+Key:      displayLayerManagerChange Value: 588
+Key:       selectionPipelineChanged Value: 631
+Key:     constructionHistoryChanged Value: 612
+Key:                           Undo Value: 563
+Key:           CurveRGBColorChanged Value: 627
+Key:                    SetModified Value: 607
+Key:        currentSoundNodeChanged Value: 634
+Key:          animLayerGhostChanged Value: 577
+Key:        interactionStyleChanged Value: 625
+Key:       softSelectOptionsChanged Value: 606
+Key:                  SceneImported Value: 617
+Key:       animLayerBaseLockChanged Value: 576
+Key:              SelectModeChanged Value: 582
+Key:               animLayerRebuild Value: 572
+Key:  renderPassSetMembershipChange Value: 595
+Key:              SelectTypeChanged Value: 583
+Key:              ColorIndexChanged Value: 602
+Key:         linearToleranceChanged Value: 608
+Key:                       idleHigh Value: 0
+Key:       lightLinkingChangedNonSG Value: 599
+Key:        PostSceneSegmentChanged Value: 601
+Key:    nurbsToPolygonsPrefsChanged Value: 610
+Key:                      deleteAll Value: 603
+Key:              ActiveViewChanged Value: 581
+Key:                    SceneOpened Value: 616
+Key:             ModelPanelSetFocus Value: 622
+Key:                    NameChanged Value: 604
+Key:                 glFrameTrigger Value: 635
+Key:                PostToolChanged Value: 570
+Key:            renderPassSetChange Value: 594
+Key:                RebuildUIValues Value: 636
+Key:             displayLayerChange Value: 592
+Key:           RecentCommandChanged Value: 568
+Key:              linearUnitChanged Value: 560
+Key:               DagObjectCreated Value: 585
+Key:            DisplayColorChanged Value: 597
+Key:                snapModeChanged Value: 629
+Key:       renderLayerManagerChange Value: 586
+Key:  displayLayerVisibilityChanged Value: 591
+Key:              displayLayerAdded Value: 589
+Key:             threadCountChanged Value: 613
+Key:        SelectPreferenceChanged Value: 584
+Key:             PreFileNewOrOpened Value: 618
+Key:               workspaceChanged Value: 620
+Key:                           idle Value: 0
+Key:            lightLinkingChanged Value: 598
+Key:            axisAtOriginChanged Value: 626
+Key:             angularUnitChanged Value: 562
+Key:          SelectPriorityChanged Value: 628
+Key:                           Redo Value: 564
+Key:           playbackRangeChanged Value: 632
+Key:            SceneSegmentChanged Value: 600
+Key:              renderLayerChange Value: 587
+// Result: scriptEditorPanel1Window|TearOffPane|scriptEditorPanel1|formLayout37|formLayout39|paneLayout1|formLayout40|tabLayout2|formLayout44|cmdScrollFieldExecuter4 // 
+eventCallup('RecentCommandChanged','iMayaUIWin|frm')
+gatherEvents(iMayaUIWin|frm)
+# Error: name 'iMayaUIWin' is not defined
+# Traceback (most recent call last):
+#   File "<maya console>", line 1, in <module>
+# NameError: name 'iMayaUIWin' is not defined # 
+eventCallup('RecentCommandChanged','iMayaUIWin|frm')

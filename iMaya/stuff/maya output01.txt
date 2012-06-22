@@ -1,0 +1,118 @@
+# pymel.core : Updating pymel with pre-loaded plugins: OpenEXRLoader, mayaHIK, mayaCharacterization, rotateHelper, Substance, tiffFloatReader, objExport # 
+hikRefreshAllCharacterListQueue;
+hikRefreshAllCharacterListQueue;
+hikRefreshAllCharacterListQueue;
+hikRefreshAllCharacterListQueue;
+iMayaCreateCallback iMayaScriptedPanel;
+'iMayaCreateCallback' with:iMayaScriptedPaneliMayaInitCallback iMayaScriptedPanel;
+'iMayaInitCallback' with:iMayaScriptedPanelcreateModelPanelMenu modelPanel1;
+createModelPanelMenu modelPanel2;
+createModelPanelMenu modelPanel3;
+createModelPanelMenu modelPanel4;
+buildPanelPopupMenu scriptEditorPanel1;
+iMayaAddCallback iMayaScriptedPanel;
+'iMayaAddCallback' with:iMayaScriptedPanelcreateModelPanelMenu modelPanel1;
+createModelPanelMenu modelPanel2;
+createModelPanelMenu modelPanel3;
+createModelPanelMenu modelPanel4;
+buildPanelPopupMenu scriptEditorPanel1;
+buildPanelPopupMenu iMayaScriptedPanel;
+Key:  nurbsCurveRebuildPrefsChanged Value: 118
+Key:                    ToolChanged Value: 76
+Key: symmetricModellingOptionsChanged Value: 112
+Key:                  PostSceneRead Value: 126
+Key:         currentContainerChange Value: 73
+Key:               SelectionChanged Value: 87
+Key:             gridDisplayChanged Value: 131
+Key:                    DragRelease Value: 128
+Key:                timeUnitChanged Value: 68
+Key:        angularToleranceChanged Value: 116
+Key:               animLayerRefresh Value: 80
+Key:           animLayerLockChanged Value: 82
+Key:                quitApplication Value: 74
+Key:               renderPassChange Value: 100
+Key:                   cameraChange Value: 85
+Key:            displayLayerDeleted Value: 97
+Key:      animLayerAnimationChanged Value: 81
+Key:      nurbsToSubdivPrefsChanged Value: 137
+Key:                     SceneSaved Value: 121
+Key:      passContributionMapChange Value: 103
+Key:                 NewSceneOpened Value: 122
+Key:         DisplayRGBColorChanged Value: 78
+Key:                    timeChanged Value: 72
+Key:  cameraDisplayAttributesChange Value: 86
+Key:     playbackRangeSliderChanged Value: 140
+Key:                MenuModeChanged Value: 130
+Key:      displayLayerManagerChange Value: 95
+Key:       selectionPipelineChanged Value: 138
+Key:     constructionHistoryChanged Value: 119
+Key:                           Undo Value: 70
+Key:           CurveRGBColorChanged Value: 134
+Key:                    SetModified Value: 114
+Key:        currentSoundNodeChanged Value: 141
+Key:          animLayerGhostChanged Value: 84
+Key:        interactionStyleChanged Value: 132
+Key:       softSelectOptionsChanged Value: 113
+Key:                  SceneImported Value: 124
+Key:       animLayerBaseLockChanged Value: 83
+Key:              SelectModeChanged Value: 89
+Key:               animLayerRebuild Value: 79
+Key:  renderPassSetMembershipChange Value: 102
+Key:              SelectTypeChanged Value: 90
+Key:              ColorIndexChanged Value: 109
+Key:         linearToleranceChanged Value: 115
+Key:                       idleHigh Value: 0
+Key:       lightLinkingChangedNonSG Value: 106
+Key:        PostSceneSegmentChanged Value: 108
+Key:    nurbsToPolygonsPrefsChanged Value: 117
+Key:                      deleteAll Value: 110
+Key:              ActiveViewChanged Value: 88
+Key:                    SceneOpened Value: 123
+Key:             ModelPanelSetFocus Value: 129
+Key:                    NameChanged Value: 111
+Key:                 glFrameTrigger Value: 142
+Key:                PostToolChanged Value: 77
+Key:            renderPassSetChange Value: 101
+Key:                RebuildUIValues Value: 143
+Key:             displayLayerChange Value: 99
+Key:           RecentCommandChanged Value: 75
+Key:              linearUnitChanged Value: 67
+Key:               DagObjectCreated Value: 92
+Key:            DisplayColorChanged Value: 104
+Key:                snapModeChanged Value: 136
+Key:       renderLayerManagerChange Value: 93
+Key:  displayLayerVisibilityChanged Value: 98
+Key:              displayLayerAdded Value: 96
+Key:             threadCountChanged Value: 120
+Key:        SelectPreferenceChanged Value: 91
+Key:             PreFileNewOrOpened Value: 125
+Key:               workspaceChanged Value: 127
+Key:                           idle Value: 0
+Key:            lightLinkingChanged Value: 105
+Key:            axisAtOriginChanged Value: 133
+Key:             angularUnitChanged Value: 69
+Key:          SelectPriorityChanged Value: 135
+Key:                           Redo Value: 71
+Key:           playbackRangeChanged Value: 139
+Key:            SceneSegmentChanged Value: 107
+Key:              renderLayerChange Value: 94
+// Result: scriptEditorPanel1Window|TearOffPane|scriptEditorPanel1|formLayout37|formLayout39|paneLayout1|formLayout40|tabLayout2|formLayout44|cmdScrollFieldExecuter4 // 
+refreshAllCharacterLists;
+refreshAllCharacterLists;
+refreshAllCharacterLists;
+refreshAllCharacterLists;
+eventCallup('RecentCommandChanged',str(repeatLast(q=1,i=1)))
+gatherEvents()
+Gathered events:
+ ID   75 Event: RecentCommandChanged
+scriptJob -listJobs
+# Error: name 'listJobs' is not defined
+# Traceback (most recent call last):
+#   File "<maya console>", line 1, in <module>
+# NameError: name 'listJobs' is not defined # 
+scriptJob -listEvents
+# Error: name 'listEvents' is not defined
+# Traceback (most recent call last):
+#   File "<maya console>", line 1, in <module>
+# NameError: name 'listEvents' is not defined # 
+toggleCommandLineInputSourceType;
