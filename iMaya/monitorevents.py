@@ -102,7 +102,7 @@ def iMayaUI():
                             dcb='iMayaDeleteCallback', \
                             scb='iMayaSaveStateCallback', \
                             unique=True )
-		print "##### Panel TYPE Created %s" % wPanel
+		print "##### Panel TYPE Created"
 
 
 #  create an unparented scripted panel, place it
