@@ -21,7 +21,11 @@ intelligence Web Site
 RELEASE NOTES
 -------------
 
-- Alpha 0.0.1
+- Pre Alpha 0.0.3
+
+	developing Panels and Window UI
+
+- Pre Alpha 0.0.1
 
 	First Event monitoring Tests
 
