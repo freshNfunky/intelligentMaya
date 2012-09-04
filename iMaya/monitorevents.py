@@ -56,7 +56,7 @@ def monitorEvents(instance):
 		print "Parent Name: %s" % parent
 		if not parent: return 
 	else: 
-		print "instance does noe exist: %s" % instance
+		print "instance does not exist: %s" % instance
 		return 
 
      
