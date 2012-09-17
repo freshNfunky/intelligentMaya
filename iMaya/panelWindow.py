@@ -7,7 +7,9 @@ class PanelWindow( object ):
     gSampleState = []
         
     _wName = ''
-    _optionShowMenue = 1
+    _optionShowMenue = False
+    _optionTextFieldsize = 100
+    _optionMarginWidth = 2
     _scrollField = 'scrollField'
     _rowColumn = 'rowColumn'
     _ActionCol = ''
@@ -176,10 +178,10 @@ class PanelWindow( object ):
             # mel.setParent(control+'|'+self._scrollField+'|'+self._rowColumn)
             mel.setParent( self._ActionCol)
                        
-            mel.separator(h=10,style="none")
-            ObjUIpath = mel.frameLayout(mw=10,l="Sliders")
-            mel.columnLayout('sampleCol',adj=True)
-            mel.separator(h=10,style="none")
+            mel.separator(h=self._optionMarginWidth,style="none")
+            ObjUIpath = mel.frameLayout(mw=self._optionMarginWidth,l="Sliders")
+            mel.columnLayout('subCol',adj=True)
+            mel.separator(h=self._optionMarginWidth,style="none")
             
             mel.floatSliderGrp('fsg1',v=self.gSampleState['fsg1'],
                 l="Property A",f=True)
@@ -188,7 +190,7 @@ class PanelWindow( object ):
             mel.floatSliderGrp('fsg3',v=self.gSampleState['fsg3'],
                 l="Property C",f=True)
             
-            mel.separator(h=10,style="none")
+            mel.separator(h=self._optionMarginWidth,style="none")
             # mel.setParent('..')
             # mel.setParent('..')
             
@@ -203,11 +205,11 @@ class PanelWindow( object ):
             
             mel.setParent( self._ActionCol)
             
-            mel.separator(h=10,style="none")    
+            mel.separator(h=self._optionMarginWidth,style="none")    
                          
-            ObjUIpath = mel.frameLayout(mw=10,l="Radio Buttons")
-            mel.columnLayout('sampleCol')
-            mel.separator(h=10,style="none")
+            ObjUIpath = mel.frameLayout(mw=self._optionMarginWidth,l="Radio Buttons")
+            mel.columnLayout('subCol')
+            mel.separator(h=self._optionMarginWidth,style="none")
             
             mel.radioButtonGrp('rbg',nrb=3,
                 l="Big Options",
@@ -218,28 +220,28 @@ class PanelWindow( object ):
                 select=self.gSampleState['rbg'],
                 la3=("Option 4", "Option 5", "Option 6"))
             
-            mel.separator(h=10,style="none")
+            mel.separator(h=self._optionMarginWidth,style="none")
             
             return ObjUIpath
 
 #------------------------------------------------------------------------        
-    def createTextfieldObj( self , content):
+    def createTextfieldObj( self , content, label, _collapsed):
         """ creates a TextBox Element """
                         
         if mel.scrollLayout(self._scrollField, ex=True):
             
             mel.setParent( self._ActionCol)
             
-            mel.separator(h=10,style="none")
+            mel.separator(h=self._optionMarginWidth,style="none")
                              
-            ObjUIpath = mel.frameLayout(mw=10,l="TextField")
-            mel.columnLayout('sampleCol',adj=True)
-            mel.separator(h=10,style="none")
+            ObjUIpath = mel.frameLayout(mw=self._optionMarginWidth,l = label, collapse = bool(_collapsed), collapsable = bool(_collapsed))
+            mel.columnLayout('subCol',adj=True)
+            mel.separator(h=self._optionMarginWidth,style="none")
                     
             mel.scrollField(numberOfLines=3, editable=False, 
-                            wordWrap=False, h=100, text = content )
+                            wordWrap=False, h = self._optionTextFieldsize, text = content  )
             
-            mel.separator(h=10,style="none")
+            mel.separator(h=self._optionMarginWidth,style="none")
                         
             return ObjUIpath
         

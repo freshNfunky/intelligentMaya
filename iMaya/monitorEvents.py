@@ -10,34 +10,45 @@ creator: Felix Schaller - www.felixschaller.com
 # maya.standalone.initialize()
 
 import pymel.core as mel
-
+import panelWindow 
+reload (panelWindow)
+import string
 
 class EventMonitor( object ):
     
     #  Class globals
     eventID = dict()
     eventRecord = []
+    RecStatus = False
+    _UIobject = None
+    _FuncFrame = 'FuncPanel'
+    _recButton = ''
+    _playButton = ''
+    _optionInspectWidth = 300
+    _optionInspectHeight = 100
+    _optionFuncHeight = 80
+    _optionMarginWidth = 2
     
     # ------------
-    def __init__(self, instance, UIpath, namespace=__name__):
+    def __init__(self, instance, windowObj, namespace=__name__):
         """install event monitoring"""
         
+        self._UIobject = windowObj
         self._module = namespace
         self.__name__ = instance
         self._instance = str(self._module) + '.' + self.__name__
         
-      # check the right use of this Function
-        panelName = UIpath.split('|')[-1]
-        if mel.scriptedPanel( panelName, ex=True,):
-            control = mel.scriptedPanel (panelName, q=True, control=True)
+        if windowObj is None:
+            print "UI Element does not exist: %s" % UIpath
+            return 
+        else: 
+            if not mel.scriptedPanel (windowObj.__name__, exists=True):
+                return
+            
+            control = mel.scriptedPanel (windowObj.__name__, q=True, control=True)
             print "Panel Name: %s" % control
             mel.setParent (control) 
             parent = str(mel.setParent (upLevel=True))
-            print "Parent Name: %s" % parent
-            if not parent: return 
-        else: 
-            print "UI Element does not exist: %s" % UIpath
-            return 
     
          
     #    list maya events
@@ -49,7 +60,7 @@ class EventMonitor( object ):
             if "idle" not in job:
                 
                 jobId = mel.scriptJob(p=parent, e=[job, "%s._eventCallup('%s','%s')" 
-                                                   % (self._instance, str(job), UIpath)])
+                                                   % (self._instance, str(job), windowObj.__name__)])
                 jobIdList.append(jobId)
     
             else: 
@@ -67,14 +78,27 @@ class EventMonitor( object ):
     def _gatherEvents(self, instance):
         """event collector called once after the first Idle Event"""
         
-        print ("Gathered events by '"+instance+"':")
+        message = "Gathered events by '%s':\n" % instance
             
     #    get the Id for the key
         inverseID=dict(zip(self.eventID.values(),self.eventID.keys()))
     
     #    prompt Result
         for Id in self.eventRecord:
-            print " ID %4d Event: %s" % (Id, inverseID.get(Id,0))
+            token = str(" ID %4d Event: %s \n" % (Id, inverseID.get(Id,0)))
+            message = message + token
+               
+    #    --------------create new UI entry---------------
+        objUI = self._UIobject.createTextfieldObj(message, "eventID: %s" % inverseID.get(self.eventRecord[0],0),True)
+        mel.setParent(objUI)
+        
+        mel.frameLayout(mw=self._optionMarginWidth,l = 'Command Inspect', collapse = True, collapsable = True) 
+        mel.columnLayout('subCol',adj=True)
+        mel.separator(h=self._optionMarginWidth,style="none")
+        mel.scrollField(numberOfLines=3, editable=False, 
+                        wordWrap=False, h = self._optionInspectHeight, w = self._optionInspectWidth, text = "place Holder"  )
+        mel.separator(h=self._optionMarginWidth,style="none")
+        
         
     #    reset Event Collection
         self.eventRecord = []
@@ -92,56 +116,53 @@ class EventMonitor( object ):
     #    install Event gather at the next idle event 
         if not self.eventID.get('idle'): self.eventID["idle"] = mel.scriptJob(ro=True, ie=("%s._gatherEvents('%s')"
                                                                                        % (self._instance, message)))
+    # ------------
+    def _buttonRecord (self, UIpath):
+        print "REC pressed: %s" % UIpath 
+        if self.RecStatus:
+            self.RecStatus = False
+            label = "RECORD"
+        else:
+            self.RecStatus = True
+            label = "RECORDING"
+        mel.button(self._recButton, edit=True, l=label)    
+            
+        return
+    
+    # ------------
+    def _buttonPlay (self, UIpath):
+        print "PLAY pressed: %s" % UIpath        
+        return
+    
+    # ------------
+    def createFunctions(self, windowObj):
         
- 
+        if windowObj is None:
+            print "UI Element does not exist: %s" % UIpath
+            return 
+        else:
+            mel.setParent(windowObj._wName)
+            mel.columnLayout('funcCol',adj=False,height=self._optionFuncHeight)
+            self._FuncFrame = mel.frameLayout( self._FuncFrame, l='Function Frame' ,lv=True, bv=True )
+            mel.columnLayout('fileCol',adj=True)
+            mel.rowColumnLayout( 'funcRowColumn', numberOfColumns=2)
+            self._recButton = mel.button( label="RECORD", command = mel.Callback( self._buttonRecord, self._FuncFrame ) )
+            self._playButton = mel.button( label="EXECUTE", command = mel.Callback( self._buttonPlay, self._FuncFrame ) )
+            mel.setParent('..') 
+            mel.columnLayout('fileCol',adj=True)
+            mel.textFieldButtonGrp( label='File Name:', fileName='Path/file.txt', buttonLabel='Import/Export' )  
+     
 
 # ------------  
 def iMayaUI():
     """Main STARTUP Function"""
     
-#  define UI Element Names    
-    panelType = 'iMayaScriptedPanelType'
-    panelName = 'iMayaScriptedPanel'
-    winName = 'iMayaUIWin'
-    panelWrapName = 'frm'
-    
-#  define scripted Panel if it doesn't exist
-#
-    if not mel.scriptedPanelType(panelType, ex=True):
-		mel.scriptedPanelType( panelType, \
-                            ccb='iMayaCreateCallback', \
-                            icb='iMayaInitCallback', \
-                            acb='iMayaAddCallback', \
-                            rcb='iMayaRemoveCallback', \
-                            dcb='iMayaDeleteCallback', \
-                            scb='iMayaSaveStateCallback', \
-                            unique=True )
-		print "##### Panel TYPE Created"
-
-
-#  create an unparented scripted panel, place it
-#  in one window, 
-#
-#  Create unparented scripted panel
-#
-    if not mel.scriptedPanel(panelName, ex=True):
-        wPanel = mel.scriptedPanel(  panelName, unParent=True, type='iMayaScriptedPanelType', label='iMaya' )
-        print "##### Panel Name Created %s" % wPanel
-#  --- yet no check implemented where Proc checks false panel assignment 
-		
-		
-#    Create a couple of windows and parent the scripted panel to the first.
-#
-    wName = mel.window( winName, t='iMayaUI Window' )
-    wFrame = mel.frameLayout( panelWrapName, l='iMayaUIPanel',lv=True, bv=True )
-    panelParent = (winName+'|'+panelWrapName)
-    mel.scriptedPanel( panelName, e=True, parent=panelParent )
-    panelUIpath = mel.scriptedPanel( panelName, q=True, control=True )
-    mel.showWindow()
+    panelObj = panelWindow.openTestPanel()
     
 #    create Events watching
     global monitorEvents
-    monitorEvents=EventMonitor( 'monitorEvents', panelUIpath )
+    monitorEvents=EventMonitor( 'monitorEvents', panelObj )
+    monitorEvents.createFunctions(panelObj) 
     
     return monitorEvents
 
